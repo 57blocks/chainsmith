@@ -82,11 +82,24 @@ Chainsmith 是一个区块链开发和管理平台。
 
 Documentation and getting started guides will be added soon.
 
+## 快速开始
+
+文档和入门指南即将添加。
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 许可证
+
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
 
 ## Support
 
 - Community Support: GitHub Issues
 - Enterprise Support: Contact sales@57blocks.com
+
+## 支持
+
+- 社区支持：GitHub Issues
+- 企业支持：sales@57blocks.com
