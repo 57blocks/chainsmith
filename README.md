@@ -108,4 +108,4 @@ Chainsmith 是一个区块链开发和管理平台。
 ### 支持
 
 - 社区支持：GitHub Issues
-- 企业支持：sales@57blocks.com
+- 企业支持：联系 sales@57blocks.com
