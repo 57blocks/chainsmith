@@ -1,0 +1,62 @@
+{
+    "description": "Load and Stress Test Configuration",
+    "usage": "Copy to load-stress.config.json and adjust settings for your environment",
+
+    "environments": {
+        "local": {
+            "createNewWallet": true,
+            "fundingAmount": "0.1",
+            "testTransactionAmount": "0.001"
+        },
+        "testnet": {
+            "createNewWallet": false,
+            "fundingAmount": "0.1",
+            "testTransactionAmount": "0.001",
+            "walletEnvPrefix": "LOAD_WALLET_PK",
+            "walletCount": 3
+        },
+        "qa": {
+            "createNewWallet": false,
+            "fundingAmount": "0.05",
+            "testTransactionAmount": "0.0001",
+            "walletEnvPrefix": "LOAD_WALLET_PK",
+            "walletCount": 5
+        }
+    },
+
+    "tests": {
+        "stress01": {
+            "name": "Concurrent Transaction Test",
+            "description": "Multiple source wallets sending transactions concurrently",
+            "sourceWalletCount": 10,
+            "destWalletCount": 1,
+            "timeout": 900000
+        },
+        "stress02": {
+            "name": "Batch Transaction Test",
+            "description": "Test batch transactions with different batch sizes",
+            "sourceWalletCount": 5,
+            "destWalletCount": 1,
+            "batchSize": [2, 5, 10],
+            "timeout": 600000
+        },
+        "stress03": {
+            "name": "Gas Price Optimization Test",
+            "description": "Test transactions with different gas prices",
+            "sourceWalletCount": 5,
+            "destWalletCount": 1,
+            "gasPricesGwei": [20, 30, 40, 50],
+            "timeout": 600000
+        },
+        "load01": {
+            "name": "Sustained Load Test",
+            "description": "Maintain consistent TPS over time",
+            "sourceWalletCount": 5,
+            "destWalletCount": 1,
+            "testDuration": 1,
+            "batchSize": 2,
+            "batchIntervalMs": 500,
+            "timeout": 600000
+        }
+    }
+}

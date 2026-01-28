@@ -1,0 +1,137 @@
+{
+    "testConfig": {
+        "performanceExpect": {
+            "tokenTransfer": {
+                "threshold": 10000,
+                "percentage": 90
+            }
+        }
+    },
+    "chain-1": {
+        "description": "Local development chain",
+        "consensusLayer": "cosmos",
+        "executeLayer": "evm",
+        "chainId": "<YOUR_CHAIN_ID>",
+        "executeLayerHttpRpcUrl": "http://localhost:8545",
+        "consensusLayerRpcUrl": "http://localhost:26657",
+        "consensusLayerHttpRestApiUrl": "http://localhost:1317",
+        "consensusRestApiPathPrefix": "",
+        "consensusRestApiVersion": "",
+        "executionMethod": "docker",
+        "docker": {
+            "containerPatterns": {
+                "executionLayer": "validator{index}-geth",
+                "consensusLayer": "validator{index}-node"
+            },
+            "timeout": 30000
+        },
+        "nodes": [
+            {
+                "index": 0,
+                "url": "http://localhost",
+                "type": "bootnode",
+                "votingPower": 0,
+                "active": true,
+                "executeLayerHttpRpcPort": null,
+                "consensusLayerRpcPort": null,
+                "consensusLayerHttpRestApiPort": 11317,
+                "consensusLayerP2pCommPort": 16656
+            },
+            {
+                "index": 1,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 8545,
+                "consensusLayerRpcPort": 26657,
+                "consensusLayerHttpRestApiPort": 1317,
+                "consensusLayerP2pCommPort": 26656
+            },
+            {
+                "index": 2,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 28545,
+                "consensusLayerRpcPort": 36657,
+                "consensusLayerHttpRestApiPort": 21317,
+                "consensusLayerP2pCommPort": 36656
+            }
+        ],
+        "founderWallet": {
+            "name": "faucet",
+            "address": "<YOUR_ADDRESS>",
+            "privateKey": "<YOUR_PRIVATE_KEY>",
+            "privateKeySource": "local"
+        }
+    },
+    "devnet": {
+        "description": "Remote devnet environment",
+        "consensusLayer": "cosmos",
+        "executeLayer": "evm",
+        "chainId": "<YOUR_CHAIN_ID>",
+        "executeLayerHttpRpcUrl": "http://<YOUR_HOST>:8545",
+        "consensusLayerRpcUrl": "http://<YOUR_HOST>:26657",
+        "consensusLayerHttpRestApiUrl": "http://<YOUR_HOST>:1317",
+        "consensusRestApiPathPrefix": "/cosmos",
+        "consensusRestApiVersion": "v1beta1",
+        "executionMethod": "ssh",
+        "ssh": {
+            "username": "ubuntu",
+            "keySource": "env",
+            "keyPath": "SSH_KEY",
+            "connectionTimeout": 30000,
+            "services": [
+                {
+                    "id": "execution-layer",
+                    "displayName": "EVM Execution Layer",
+                    "startCommand": "sudo systemctl start node-geth",
+                    "stopCommand": "sudo systemctl stop node-geth"
+                },
+                {
+                    "id": "consensus-layer",
+                    "displayName": "Consensus Layer",
+                    "startCommand": "sudo systemctl start cosmovisor",
+                    "stopCommand": "sudo systemctl stop cosmovisor"
+                }
+            ],
+            "defaultStartOrder": ["execution-layer", "consensus-layer"],
+            "defaultStopOrder": ["consensus-layer", "execution-layer"]
+        },
+        "nodes": [
+            {
+                "index": 0,
+                "url": "http://10.0.1.100",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 8545,
+                "consensusLayerRpcPort": 26657,
+                "consensusLayerHttpRestApiPort": 1317,
+                "consensusLayerP2pCommPort": 26656
+            },
+            {
+                "index": 1,
+                "url": "http://10.0.1.101",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 8545,
+                "consensusLayerRpcPort": 26657,
+                "consensusLayerHttpRestApiPort": 1317,
+                "consensusLayerP2pCommPort": 26656,
+                "ssh": {
+                    "keyPath": "SSH_KEY_NODE_1"
+                }
+            }
+        ],
+        "founderWallet": {
+            "name": "faucet",
+            "address": "<YOUR_ADDRESS>",
+            "privateKey": "<YOUR_PRIVATE_KEY>",
+            "privateKeySource": "local"
+        }
+    }
+}

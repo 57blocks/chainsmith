@@ -1,0 +1,94 @@
+name: Bug report
+description: Report a bug in ChainSmith
+title: '[Bug]: '
+labels: ['bug']
+body:
+    - type: markdown
+      attributes:
+          value: |
+              Thanks for taking the time to file a bug report.
+
+              If this is a security vulnerability, please do **not** file an issue.
+              See SECURITY.md for private reporting.
+
+    - type: input
+      id: chainsmith_version
+      attributes:
+          label: ChainSmith version
+          description: The version you are running (from package.json or release tag).
+          placeholder: 0.1.0
+      validations:
+          required: true
+
+    - type: input
+      id: node_version
+      attributes:
+          label: Node.js version
+          placeholder: 18.x
+      validations:
+          required: true
+
+    - type: dropdown
+      id: os
+      attributes:
+          label: OS
+          options:
+              - Linux
+              - macOS
+              - Windows
+              - WSL
+              - Other
+      validations:
+          required: true
+
+    - type: input
+      id: chain_env
+      attributes:
+          label: CHAIN_ENV
+          description: The environment key used from tests/config.json.
+          placeholder: chain-1
+      validations:
+          required: false
+
+    - type: textarea
+      id: summary
+      attributes:
+          label: Summary
+          description: What happened?
+      validations:
+          required: true
+
+    - type: textarea
+      id: steps
+      attributes:
+          label: Steps to reproduce
+          description: Provide a minimal set of steps we can follow.
+          placeholder: |
+              1. ...
+              2. ...
+              3. ...
+      validations:
+          required: true
+
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+      validations:
+          required: true
+
+    - type: textarea
+      id: actual
+      attributes:
+          label: Actual behavior
+      validations:
+          required: true
+
+    - type: textarea
+      id: logs
+      attributes:
+          label: Logs / output
+          description: Paste relevant logs (please redact secrets).
+          render: shell
+      validations:
+          required: false

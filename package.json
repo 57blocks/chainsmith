@@ -1,0 +1,86 @@
+{
+    "name": "chain-smith",
+    "version": "0.1.0",
+    "description": "blockchain testing framework",
+    "author": "",
+    "license": "MIT",
+    "scripts": {
+        "init:tests": "bash scripts/init-tests.sh",
+        "build": "tsc",
+        "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\"",
+        "lint:fix": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" --fix",
+        "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.{js,ts,json}\"",
+        "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.{js,ts,json}\"",
+        "type-check": "tsc --noEmit",
+        "commitlint": "commitlint --edit",
+        "test:basic": "bash scripts/run-test.sh basic tests/basic/basic-edsl.test.ts 60000",
+        "test:rpc:evm": "bash scripts/run-test.sh rpc-evm tests/rpc/evm-edsl.test.ts 60000",
+        "test:rpc:cometbft": "bash scripts/run-test.sh rpc-cometbft tests/rpc/cometbft-edsl.test.ts 60000",
+        "test:fault-tolerance": "bash scripts/run-test.sh fault-tolerance tests/fault-tolerance/fault-tolerance-edsl.test.ts 300000",
+        "test:performance": "bash scripts/run-test.sh performance tests/performance/performance.test.ts 120000",
+        "test:load:stress": "bash scripts/run-test.sh load-stress tests/load_stress/load.stress.test.ts 120000",
+        "test:cosmos:api:sample": "bash scripts/run-test.sh cosmos-api tests/api/cosmos-api.sample.test.ts 60000",
+        "test:staking:sample": "bash scripts/run-test.sh staking tests/staking/staking.sample.test.ts 60000",
+        "test:slashing:sample": "bash scripts/run-test.sh slashing tests/slashing/slashing.sample.test.ts 90000",
+        "test:rewards:sample": "bash scripts/run-test.sh rewards tests/rewards/rewards.sample.test.ts 120000",
+        "test:unit": "mocha -r ts-node/register 'src/**/__tests__/**/*.test.ts' --timeout 30_000 --exit",
+        "pre-commit": "lint-staged",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "axios": "^1.6.8",
+        "dotenv": "^16.4.5",
+        "ethers": "^6.13.4"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
+        "@commitlint/types": "^19.8.1",
+        "@eslint/js": "^9.28.0",
+        "@types/chai": "^4.3.12",
+        "@types/chai-as-promised": "^7.1.6",
+        "@types/eslint": "^9.6.1",
+        "@types/mocha": "^10.0.0",
+        "@types/mocha-steps": "^1.3.3",
+        "@types/mochawesome": "^6.2.4",
+        "@types/node": "^20.12.8",
+        "@types/ssh2": "^1.15.0",
+        "@typescript-eslint/eslint-plugin": "^8.34.0",
+        "@typescript-eslint/parser": "^8.34.0",
+        "chai": "^4.3.10",
+        "chai-as-promised": "^7.1.1",
+        "eslint": "^9.28.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.5.0",
+        "mocha": "^10.0.0",
+        "mocha-steps": "^1.3.0",
+        "mochawesome": "^6.2.2",
+        "mochawesome-merge": "^4.2.0",
+        "mochawesome-report-generator": "^5.2.0",
+        "node-ssh": "^13.2.0",
+        "prettier": "^3.3.3",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.5",
+        "typescript-eslint": "^8.34.0"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{js,jsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,md,yml,yaml}": [
+            "prettier --write"
+        ]
+    }
+}

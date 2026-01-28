@@ -1,0 +1,163 @@
+{
+    "testConfig": {
+        "performanceExpect": {
+            "tokenTransfer": {
+                "threshold": 10000,
+                "percentage": 90
+            }
+        }
+    },
+    "chain-1": {
+        "description": "Chain 1 Local Testnet",
+        "consensusLayer": "cosmos",
+        "executeLayer": "evm",
+        "chainId": 1399,
+        "executeLayerHttpRpcUrl": "http://localhost:8545",
+        "consensusLayerRpcUrl": "http://localhost:26657",
+        "consensusLayerHttpRestApiUrl": "http://localhost:1317",
+        "consensusRestApiPathPrefix": "",
+        "consensusRestApiVersion": "",
+        "executionMethod": "docker",
+        "docker": {
+            "containerPatterns": {
+                "executionLayer": "chain-1-validator{index}-geth",
+                "consensusLayer": "chain-1-validator{index}-node"
+            },
+            "timeout": 30000
+        },
+        "nodes": [
+            {
+                "index": 0,
+                "url": "http://localhost",
+                "type": "bootnode",
+                "votingPower": 0,
+                "active": true,
+                "executeLayerHttpRpcPort": null,
+                "consensusLayerRpcPort": null,
+                "consensusLayerHttpRestApiPort": 11317,
+                "consensusLayerP2pCommPort": 16656
+            },
+            {
+                "index": 1,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 8545,
+                "consensusLayerRpcPort": 26657,
+                "consensusLayerHttpRestApiPort": 1317,
+                "consensusLayerP2pCommPort": 26656
+            },
+            {
+                "index": 2,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 28545,
+                "consensusLayerRpcPort": 36657,
+                "consensusLayerHttpRestApiPort": 21317,
+                "consensusLayerP2pCommPort": 36656
+            },
+            {
+                "index": 3,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 38545,
+                "consensusLayerRpcPort": 46657,
+                "consensusLayerHttpRestApiPort": 31317,
+                "consensusLayerP2pCommPort": 46656
+            },
+            {
+                "index": 4,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 48545,
+                "consensusLayerRpcPort": 56657,
+                "consensusLayerHttpRestApiPort": 41317,
+                "consensusLayerP2pCommPort": 56656
+            }
+        ],
+        "founderWallet": {
+            "name": "faucet",
+            "address": "0x_YOUR_FOUNDER_ADDRESS",
+            "privateKey": "0x_YOUR_FOUNDER_PRIVATE_KEY",
+            "privateKeySource": "local"
+        }
+    },
+    "chain-2": {
+        "description": "Chain 2 Local Testnet",
+        "consensusLayer": "cosmos",
+        "executeLayer": "evm",
+        "chainId": 9002,
+        "executeLayerHttpRpcUrl": "http://localhost:60545",
+        "consensusLayerRpcUrl": "http://localhost:60657",
+        "consensusLayerHttpRestApiUrl": "http://localhost:60317",
+        "consensusRestApiPathPrefix": "/cosmos",
+        "consensusRestApiVersion": "v1beta1",
+        "executionMethod": "docker",
+        "docker": {
+            "containerPatterns": {
+                "executionLayer": "chain-2-validator-{index}",
+                "consensusLayer": "chain-2-validator-{index}"
+            },
+            "timeout": 30000
+        },
+        "nodes": [
+            {
+                "index": 0,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 60545,
+                "consensusLayerRpcPort": 60657,
+                "consensusLayerHttpRestApiPort": 60317,
+                "consensusLayerP2pCommPort": 60656
+            },
+            {
+                "index": 1,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 60555,
+                "consensusLayerRpcPort": 60667,
+                "consensusLayerHttpRestApiPort": 60318,
+                "consensusLayerP2pCommPort": 60666
+            },
+            {
+                "index": 2,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 60565,
+                "consensusLayerRpcPort": 60677,
+                "consensusLayerHttpRestApiPort": 60319,
+                "consensusLayerP2pCommPort": 60676
+            },
+            {
+                "index": 3,
+                "url": "http://localhost",
+                "type": "validator",
+                "votingPower": 1,
+                "active": true,
+                "executeLayerHttpRpcPort": 60575,
+                "consensusLayerRpcPort": 60687,
+                "consensusLayerHttpRestApiPort": 60320,
+                "consensusLayerP2pCommPort": 60686
+            }
+        ],
+        "founderWallet": {
+            "name": "validator0",
+            "address": "0x_YOUR_FOUNDER_ADDRESS",
+            "privateKey": "0x_YOUR_FOUNDER_PRIVATE_KEY",
+            "privateKeySource": "local"
+        }
+    }
+}
