@@ -1,16 +1,22 @@
 # Chainsmith
 
+[English](#english) | [中文](#中文)
+
+---
+
+## English
+
 Chainsmith is a blockchain development and management platform.
 
-## Features
+### Features
 
-### Community Edition (Free)
+#### Community Edition (Free)
 - Basic blockchain development tools
 - Individual developer access
 - Community support
 - Basic templates and scaffolding
 
-### Enterprise Edition
+#### Enterprise Edition
 The Enterprise Edition provides advanced features for organizations and teams:
 
 - Advanced blockchain development tools
@@ -20,9 +26,9 @@ The Enterprise Edition provides advanced features for organizations and teams:
 - Security and compliance features
 - Dedicated account manager
 
-## Pricing
+### Pricing
 
-### Enterprise Edition Pricing
+#### Enterprise Edition Pricing
 
 **Price: Contact us for enterprise pricing**
 
@@ -37,21 +43,34 @@ Typical enterprise plans include:
 - Annual subscription options
 - Custom feature development available
 
+### Getting Started
+
+Documentation and getting started guides will be added soon.
+
+### License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+### Support
+
+- Community Support: GitHub Issues
+- Enterprise Support: Contact sales@57blocks.com
+
 ---
 
-# Chainsmith
+## 中文
 
 Chainsmith 是一个区块链开发和管理平台。
 
-## 功能特性
+### 功能特性
 
-### 社区版（免费）
+#### 社区版（免费）
 - 基础区块链开发工具
 - 个人开发者访问权限
 - 社区支持
 - 基本模板和脚手架
 
-### 企业版
+#### 企业版
 企业版为组织和团队提供高级功能：
 
 - 高级区块链开发工具
@@ -61,9 +80,9 @@ Chainsmith 是一个区块链开发和管理平台。
 - 安全和合规功能
 - 专属客户经理
 
-## 定价
+### 定价
 
-### 企业版定价
+#### 企业版定价
 
 **价格：请联系我们获取企业版定价**
 
@@ -78,28 +97,15 @@ Chainsmith 是一个区块链开发和管理平台。
 - 年度订阅选项
 - 可定制功能开发
 
-## Getting Started
-
-Documentation and getting started guides will be added soon.
-
-## 快速开始
+### 快速开始
 
 文档和入门指南即将添加。
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 许可证
+### 许可证
 
 本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件。
 
-## Support
-
-- Community Support: GitHub Issues
-- Enterprise Support: Contact sales@57blocks.com
-
-## 支持
+### 支持
 
 - 社区支持：GitHub Issues
 - 企业支持：sales@57blocks.com
