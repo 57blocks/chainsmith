@@ -1,38 +1,38 @@
-# Cosmos API Methods - 使用自定义路径配置指南
+# Cosmos API Methods - Guide
 
-## 概述
+## Overview
 
-我们在 `IConsensusLayerClient` 接口中新增了一系列 Cosmos SDK API 方法，这些方法支持自定义路径配置，提供了最大的灵活性来适应不同版本的 Cosmos SDK 和自定义的 API 结构。
+We have introduced a series of Cosmos SDK API methods in the `IConsensusLayerClient` interface. These methods support custom path configuration, providing maximum flexibility to adapt to different versions of the Cosmos SDK and custom API structures.
 
-## 新增的 API 方法
+## New API Methods
 
 ### 1. Staking Module APIs
 
 ```typescript
-// 获取验证者列表
+// Get the list of validators
 async getStakingValidators(customPath?: string): Promise<any>
 async getStakingParams(customPath?: string): Promise<any>
 async getStakingPool(customPath?: string): Promise<any>
 ```
 
-**默认路径:**
+**Default Paths:**
 
 - `/staking/validators`
 - `/staking/params`
 - `/staking/pool`
 
-**使用示例:**
+**Usage Examples:**
 
 ```typescript
 const consensusClient = blockchain.getDefaultConsensusLayerClient();
 
-// 使用默认路径
+// Use default paths
 const validators = await consensusClient.getStakingValidators();
 
-// 使用自定义路径 (适配新版本 Cosmos SDK)
+// Use custom paths (to adapt to newer versions of Cosmos SDK)
 const validators = await consensusClient.getStakingValidators('/cosmos/staking/v1beta1/validators');
 
-// 使用自定义路径 (适配特殊链的API结构)
+// Use custom paths (to adapt to specific chain API structures)
 const validators = await consensusClient.getStakingValidators('/api/v1/staking/validators');
 ```
 
@@ -43,18 +43,18 @@ async getSlashingParams(customPath?: string): Promise<any>
 async getSlashingSigningInfos(customPath?: string): Promise<any>
 ```
 
-**默认路径:**
+**Default Paths:**
 
 - `/slashing/params`
 - `/slashing/signing_infos`
 
-**使用示例:**
+**Usage Examples:**
 
 ```typescript
-// 使用默认路径
+// Use default paths
 const slashingParams = await consensusClient.getSlashingParams();
 
-// 使用新版本 Cosmos SDK 路径
+// Use newer Cosmos SDK paths
 const signingInfos = await consensusClient.getSlashingSigningInfos('/cosmos/slashing/v1beta1/signing_infos');
 ```
 
@@ -64,17 +64,17 @@ const signingInfos = await consensusClient.getSlashingSigningInfos('/cosmos/slas
 async getMintParams(customPath?: string): Promise<any>
 ```
 
-**默认路径:**
+**Default Paths:**
 
 - `/mint/params`
 
-**使用示例:**
+**Usage Examples:**
 
 ```typescript
-// 使用默认路径
+// Use default paths
 const mintParams = await consensusClient.getMintParams();
 
-// 使用自定义路径
+// Use custom paths
 const mintParams = await consensusClient.getMintParams('/cosmos/mint/v1beta1/params');
 ```
 
@@ -85,17 +85,17 @@ async getNodeInfo(customPath?: string): Promise<any>
 async getChainStatus(): Promise<any>
 ```
 
-**默认路径:**
+**Default Paths:**
 
 - `/base/tendermint/v1beta1/node_info`
 
-**使用示例:**
+**Usage Examples:**
 
 ```typescript
-// 使用默认路径
+// Use default paths
 const nodeInfo = await consensusClient.getNodeInfo();
 
-// 使用自定义路径 (适配老版本)
+// Use custom paths (to adapt to older versions)
 const nodeInfo = await consensusClient.getNodeInfo('/node_info');
 ```
 
@@ -107,27 +107,27 @@ async getTendermintBlock(height?: string): Promise<any>
 async getTendermintValidators(height?: string): Promise<any>
 ```
 
-**使用示例:**
+**Usage Examples:**
 
 ```typescript
-// 获取节点状态
+// Get node status
 const status = await consensusClient.getTendermintStatus();
 
-// 获取最新区块
+// Get the latest block
 const latestBlock = await consensusClient.getTendermintBlock();
 
-// 获取特定高度的区块
+// Get a block at a specific height
 const specificBlock = await consensusClient.getTendermintBlock('12345');
 
-// 获取验证者集合
+// Get the validator set
 const validators = await consensusClient.getTendermintValidators();
 ```
 
-## 路径配置策略
+## Path Configuration Strategy
 
-### 1. 不同 Cosmos SDK 版本的路径映射
+### 1. Path Mapping for Different Cosmos SDK Versions
 
-| 模块               | 老版本路径            | 新版本路径                           |
+| Module             | Legacy Path           | New Path                             |
 | ------------------ | --------------------- | ------------------------------------ |
 | Staking Validators | `/staking/validators` | `/cosmos/staking/v1beta1/validators` |
 | Staking Params     | `/staking/params`     | `/cosmos/staking/v1beta1/params`     |
@@ -135,7 +135,7 @@ const validators = await consensusClient.getTendermintValidators();
 | Slashing Params    | `/slashing/params`    | `/cosmos/slashing/v1beta1/params`    |
 | Mint Params        | `/mint/params`        | `/cosmos/mint/v1beta1/params`        |
 
-### 2. 自适应路径检测示例
+### 2. Adaptive Path Detection Example
 
 ```typescript
 class CosmosApiHelper {
@@ -146,19 +146,19 @@ class CosmosApiHelper {
     }
 
     async getValidatorsWithFallback(): Promise<any> {
-        // 尝试新版本路径
+        // Try the new version path
         try {
             return await this.consensusClient.getStakingValidators('/cosmos/staking/v1beta1/validators');
         } catch (error) {
             console.log('New path failed, trying legacy path...');
-            // 回退到旧版本路径
+            // Fallback to the legacy path
             return await this.consensusClient.getStakingValidators('/staking/validators');
         }
     }
 }
 ```
 
-### 3. 配置驱动的路径管理
+### 3. Configuration-Driven Path Management
 
 ```typescript
 interface CosmosApiConfig {
@@ -169,9 +169,9 @@ interface CosmosApiConfig {
     mintParams: string;
 }
 
-// 不同链的配置
+// Configurations for different chains
 const CHAIN_CONFIGS = {
-    // Cosmos Hub 配置
+    // Cosmos Hub configuration
     cosmoshub: {
         stakingValidators: '/cosmos/staking/v1beta1/validators',
         stakingParams: '/cosmos/staking/v1beta1/params',
@@ -179,7 +179,7 @@ const CHAIN_CONFIGS = {
         slashingParams: '/cosmos/slashing/v1beta1/params',
         mintParams: '/cosmos/mint/v1beta1/params',
     },
-    // 老版本链的配置
+    // Legacy chain configuration
     legacy: {
         stakingValidators: '/staking/validators',
         stakingParams: '/staking/params',
@@ -187,7 +187,7 @@ const CHAIN_CONFIGS = {
         slashingParams: '/slashing/params',
         mintParams: '/mint/params',
     },
-    // 自定义链的配置
+    // Custom chain configuration
     custom: {
         stakingValidators: '/api/v1/staking/validators',
         stakingParams: '/api/v1/staking/params',
@@ -216,47 +216,47 @@ class ConfigurableCosmosClient {
 }
 ```
 
-## 迁移指南
+## Migration Guide
 
-### 从硬编码 HTTP 调用迁移到客户端方法
+### Migrating from Hardcoded HTTP Calls to Client Methods
 
-**之前 (硬编码):**
+**Before (Hardcoded):**
 
 ```typescript
-// 直接使用 axios 调用
+// Request directly using axios
 const response = await axios.get(`${restEndpoint}/staking/validators`);
 const validators = response.data;
 ```
 
-**之后 (使用客户端方法):**
+**After (Using Client Methods):**
 
 ```typescript
-// 使用共识层客户端
+// Use the consensus layer client
 const validators = await consensusClient.getStakingValidators();
 
-// 或者使用自定义路径
+// Or use a custom path
 const validators = await consensusClient.getStakingValidators('/cosmos/staking/v1beta1/validators');
 ```
 
-### CosmosApiTestBuilder 重构示例
+### CosmosApiTestBuilder Refactoring Example
 
-参考 `tests/restapi/cosmos-api-refactored.sample.test.ts` 文件，看如何：
+Refer to the `tests/restapi/cosmos-api-refactored.sample.test.ts` file to see how to:
 
-1. 使用 `blockchain.getDefaultConsensusLayerClient()` 获取客户端
-2. 替换硬编码的 API 调用为客户端方法调用
-3. 支持默认路径和自定义路径的测试
-4. 保持向后兼容性
+1. Obtain a client using `blockchain.getDefaultConsensusLayerClient()`
+2. Replace hardcoded API calls with client method calls
+3. Support testing with default and custom paths
+4. Maintain backward compatibility
 
-## 最佳实践
+## Best Practices
 
-### 1. 渐进式路径探测
+### 1. Progressive Path Probing
 
 ```typescript
 async function getStakingValidatorsRobust(consensusClient: IConsensusLayerClient): Promise<any> {
     const paths = [
-        '/cosmos/staking/v1beta1/validators', // 新版本
-        '/staking/validators', // 旧版本
-        '/api/v1/staking/validators', // 自定义
+        '/cosmos/staking/v1beta1/validators', // New version
+        '/staking/validators', // Legacy version
+        '/api/v1/staking/validators', // Custom
     ];
 
     for (const path of paths) {
@@ -273,7 +273,7 @@ async function getStakingValidatorsRobust(consensusClient: IConsensusLayerClient
 }
 ```
 
-### 2. 错误处理和日志记录
+### 2. Error Handling and Logging
 
 ```typescript
 async function safeApiCall<T>(apiCall: () => Promise<T>, context: string): Promise<T | null> {
@@ -285,19 +285,19 @@ async function safeApiCall<T>(apiCall: () => Promise<T>, context: string): Promi
     }
 }
 
-// 使用示例
+// Usage example
 const validators = await safeApiCall(
     () => consensusClient.getStakingValidators('/custom/path'),
     'custom staking validators'
 );
 ```
 
-### 3. 性能优化
+### 3. Performance Optimization
 
 ```typescript
 class CachedCosmosClient {
     private cache = new Map<string, { data: any; timestamp: number }>();
-    private readonly CACHE_TTL = 30000; // 30秒缓存
+    private readonly CACHE_TTL = 30000; // 30-second cache
 
     async getCachedStakingValidators(customPath?: string): Promise<any> {
         const cacheKey = `validators_${customPath || 'default'}`;
@@ -315,14 +315,14 @@ class CachedCosmosClient {
 }
 ```
 
-## 总结
+## Summary
 
-通过添加自定义路径支持，我们实现了：
+By adding support for custom paths, we have achieved:
 
-1. **向后兼容性**: 默认路径保持现有行为不变
-2. **灵活性**: 支持不同版本 Cosmos SDK 的路径格式
-3. **可扩展性**: 可以适配自定义 API 结构
-4. **易用性**: 简洁的接口，可选的路径参数
-5. **维护性**: 集中管理API调用逻辑，避免硬编码
+1. **Backward Compatibility**: Default paths maintain existing behavior
+2. **Flexibility**: Supports path formats across different versions of the Cosmos SDK
+3. **Extensibility**: Adapts to custom API structures
+4. **Usability**: Clean interfaces with optional path parameters
+5. **Maintainability**: Centralizes API call logic to avoid hardcoding
 
-这种设计让框架能够适应各种 Cosmos 生态系统中的区块链网络，无论它们使用什么版本的 SDK 或自定义的 API 结构。
+This design enables the framework to adapt to a wide variety of blockchain networks in the Cosmos ecosystem, regardless of the SDK version or custom API structure they use.
